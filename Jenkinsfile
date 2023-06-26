@@ -1,24 +1,63 @@
+def img
 
-pipeline {
-    agent any
+pipeline
+{
+
+    environment
+    {
+
+        registry = "UrvashiRathore/EMP-Portal-Project-DevOps"
+
+        registryCredential = 'DOCKERHUB'
+
+        githubCredential = 'Github-Creds'
+
+        dockerImage = ' '
+
+        
+    }
+
+   agent any
 
     stages {
-        stage('Checkout') {
+        stage('Checkout project') {
+		
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Shantanu-2001/EMP-Portal-Project-DevOps.git']]])
+       git branch: 'dev',
+       credentialsId: githubCredential,
+       url: 'https://github.com/UrvashiRathore/EMP-Portal-Project-DevOps.git'
             }
         }
-        stage('Build') {
+
+        stage('Installing packages') {
             steps {
-                git branch: 'main', url: 'https://github.com/Shantanu-2001/EMP-Portal-Project-DevOps.git'
-                sh 'pip install -r requirements.txt'  // Install project dependencies
-                sh 'python3 app.py'
+                sh 'pip install -r requirements.txt'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'python3 -m pytest'
-            }
-        }
+	stage('Static code analysis')
+	    {
+		    steps{
+			    script{
+				    sh 'find . -name \\*.py | xargs pylint .f parseable | tee pylint.log'
+				    recordIssues(
+					    tool: pyLint(pattern: 'pylint.log'),
+					    unstableTotalHigh: 100
+					    )
+			    }
+		    }
+	    }
+	    stage('Testing with pytest')
+	    {
+		    steps{
+			    script{
+				    withPythonEnv('python3')
+				    {
+					    sh 'pip install pytest'
+					    sh 'pip install flask_sqlalchemy'
+					    sh 'pytest test_app.py'
+				    }
+			    }
+		    }
+	    }
     }
 }
