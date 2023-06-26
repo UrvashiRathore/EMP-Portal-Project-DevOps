@@ -53,7 +53,7 @@ pipeline
 				    withPythonEnv('python3')
 				    {
 					    sh 'pip install pytest'
-					    sh 'pip install flask_sqlalchemy'
+			
 					    sh 'pytest test_app.py'
 				    }
 			    }
