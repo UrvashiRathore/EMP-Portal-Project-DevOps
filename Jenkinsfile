@@ -52,7 +52,7 @@ pipeline
 			    script{
 				    withPythonEnv('python3')
 				    {
-					   
+					      sh 'python3 pytest'
 			
 					    sh 'pytest test_app.py'
 				    }
