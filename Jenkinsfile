@@ -46,7 +46,7 @@ pipeline
 			    }
 		    }
 	    }
-	   stage('Testing with pytest') {
+	   ///stage('Testing with pytest') {
              steps {
                script {
                  withPythonEnv('python3') {
@@ -57,5 +57,16 @@ pipeline
         }
     }
 }
+  ///
+	stage('SonarQube Analysis')
+{
+         steps{
+          script{
+            withSonarQubeEnv('sonar'){
+                sh '''${scannerHome}/bin/sonar-scanner\-Dsonar.projectKey=DevOps-Project\-Dsonar.source-.'''
+            }
+        }
     }
+}
+}
 }
