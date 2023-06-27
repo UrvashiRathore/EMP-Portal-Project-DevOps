@@ -53,7 +53,9 @@ pipeline
          steps{
           script{
             withSonarQubeEnv('sonar'){
-                sh '''${scannerHome}/bin/sonar-scanner\-Dsonar.projectKey=DevOps-Project\-Dsonar.source-.'''
+               
+		sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=DevOps-Project -Dsonar.source=."
+
             }
         }
     }
