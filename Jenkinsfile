@@ -61,4 +61,20 @@ pipeline
     }
 }
 }
+	post{
+        always{
+            script{
+                def buildStatus = currentBuild.currentResult ?: 'UNKNOWN'
+                def color = buildStatus== 'SUCCESS' ? 'good' : 'danger'
+
+                slackSend(
+                    channel: '#devops-project',
+                    color: color,
+                    message: "Build ${env.BUILD_NUMBER} ${buildStatus}: STAGE=${env.STAGE_NAME}",
+                    teamDomain: 'xaidv05',
+                    tokenCredentialId: 'jen_slack2'
+                )
+            }
+        }
+    }
 }
