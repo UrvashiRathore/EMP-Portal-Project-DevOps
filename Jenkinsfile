@@ -71,8 +71,8 @@ pipeline
                     channel: '#devops-project',
                     color: color,
                     message: "Build ${env.BUILD_NUMBER} ${buildStatus}: STAGE=${env.STAGE_NAME}",
-                    teamDomain: 'xaidv05',
-                    tokenCredentialId: 'jen_slack2'
+                    teamDomain: 'project-d5t8181',
+                    tokenCredentialId: 'my_s2'
                 )
             }
         }
