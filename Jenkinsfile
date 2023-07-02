@@ -60,7 +60,7 @@ pipeline
         }
     }
 }
-	    stage('SonarQube Quality Gates')
+	    stage('SonarQube Quality Gates'){
 	    steps {
 		    script {
 			    withSonarQubeEnv('sonarqube') {
