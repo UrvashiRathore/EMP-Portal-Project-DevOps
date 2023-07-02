@@ -54,8 +54,8 @@ pipeline
          steps{
           script{
             withSonarQubeEnv('sonarqube'){
-               
-		sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sonarqube_jenkins -Dsonar.source=."
+                sh"sonar-scanner -X"
+		//sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sonarqube_jenkins -Dsonar.source=."
 
             }
         }
