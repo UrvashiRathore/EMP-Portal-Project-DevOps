@@ -13,6 +13,7 @@ pipeline
         githubCredential = 'Github-Creds'
 
         dockerImage = ' '
+	scannerHome = tool 'sonar4.8'
 
         
     }
