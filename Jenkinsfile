@@ -56,7 +56,7 @@ pipeline
                 // Configure SonarQube Scanner
 		def scannerHome = tool "sonarqube_jenkins";
 
-                withSonarQubeEnv('VivekSonarServer') {
+                withSonarQubeEnv('sonarqube') {
                     // Run SonarQube analysis
                     // Replace with your project key and token
 		   sh 'sudo su'
