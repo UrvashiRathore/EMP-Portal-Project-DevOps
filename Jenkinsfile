@@ -59,7 +59,7 @@ pipeline
                 withSonarQubeEnv('sonarqube') {
                  
                   // sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=cicd_proj -Dsonar.sources=. -Dsonar.token=sqp_e36a867c5f2155d3db6cc38a06093d5f3d59b76f"
-			sh"/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube_jenkins/bin/sonar-scanner -Dsonar.projectKey=cicd_proj -Dsonar.sources=. -Dsonar.login=sqp_e36a867c5f2155d3db6cc38a06093d5f3d59b76f"
+			sh"/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube_jenkins/bin/sonar-scanner -Dsonar.projectKey=cicd_proj -Dsonar.sources=. -Dsonar.login=sqp_e36a867c5f2155d3db6cc38a06093d5f3d59b76f -X"
 
                 }
 		}
