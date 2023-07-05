@@ -58,7 +58,7 @@ pipeline
 
                 withSonarQubeEnv('sonarqube') {
                  
-                   sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=DevOps-Project -Dsonar.sources=."
+                   sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=cicd_proj -Dsonar.sources=."
                 }
 		}
             }
