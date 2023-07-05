@@ -60,7 +60,11 @@ pipeline
                     // Run SonarQube analysis
                     // Replace with your project key and token
 		   sh 'sudo su'
-                   sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=EMP-Xebia -Dsonar.sources=${env.WORKSPACE} -Dsonar.python.coverage.reportPaths=coverage.xml -Dsonar.login=squ_0b03ce0f6a2e32bb7c232f54c4834f8e69868e9c"
+                   sh "sonar-scanner \
+  -Dsonar.projectKey=cicd_proj \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://52.66.122.127:9000 \
+  -Dsonar.token=sqp_e36a867c5f2155d3db6cc38a06093d5f3d59b76f"
                 }
 		}
             }
