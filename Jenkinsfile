@@ -79,9 +79,39 @@ pipeline
 		    }
 	    }
     }
-	    stage( clean Up){
+	    stage( 'Clean Up'){
 		    steps{
-			    sh returnStatus: true, script: docker stop $(docker ps -a | grep $(JOB_NAME) | awk \'{print $1}\
+			    sh returnStatus: true, script: docker stop $ ( docker ps -a | grep ${JOB_NAME} | awk \'{print $1}\') '
+			    sh returnStatus: true, script: docker rmi $ ( docker images | grep ${registry} | awk \'{print $3}\') --force'	
+			    sh returnStatus: true, script: 'docker rm -f ${JOB_NAME}'
+		    }
+									 }							 
+			   
+	  stage('Build Image')
+									 {
+										 steps {
+											 script{
+											 img = registry + ":${env.BUILD_ID}"
+											 println("${img}")
+											 dockerImage = docker.build("${img}")
+											 }
+										 }
+									 }
+	
+        stage('Push to DockerHub'){
+		steps{
+			script{
+				docker.withREgistry('https://registry.hub.docker.coom', registryCredential) {
+					dockerImage.push()
+				}
+			}
+		}
+	}
+        stage('Deploy to containers'){
+		steps{
+			sh label: '',script: "docker run -d --name ${JOB_NAME} -P 5002:5000 ${img}"
+		}
+	}
 }
 	post{
         always{
