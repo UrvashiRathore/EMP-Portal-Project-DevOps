@@ -57,14 +57,8 @@ pipeline
 		def scannerHome = tool "sonarqube_jenkins";
 
                 withSonarQubeEnv('sonarqube') {
-                    // Run SonarQube analysis
-                    // Replace with your project key and token
-		   sh 'sudo su'
-                   sh "sonar-scanner \
-  -Dsonar.projectKey=cicd_proj \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=http://52.66.122.127:9000 \
-  -Dsonar.token=sqp_e36a867c5f2155d3db6cc38a06093d5f3d59b76f"
+                 
+                   sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=DevOps-Project -Dsonar.sources=."
                 }
 		}
             }
