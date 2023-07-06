@@ -89,8 +89,8 @@ pipeline
 
 									 }							 
 			   
-	stage('Build Image') {
-            steps {
+	  stage('Build Image') {
+             steps {
                 script {
                     img = "${registry}:${env.BUILD_ID}"
                     println("${img}")
