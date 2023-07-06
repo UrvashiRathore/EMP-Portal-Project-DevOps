@@ -89,17 +89,15 @@ pipeline
 
 									 }							 
 			   
-	  stage('Build Image')
-									 {
-										 steps {
-											 script{
-											 img = registry + ":${env.BUILD_ID}"
-											 println("${img}")
-											 dockerImage = docker.build("${img}")
-											 }
-										 }
-									 }
-	
+	stage('Build Image') {
+            steps {
+                script {
+                    def img = "${registry}:${env.BUILD_ID}"
+                    println("${img}")
+                    def dockerImage = docker.build(img)
+                }
+            }
+        }
         stage('Push to DockerHub'){
 		steps{
 			script{
