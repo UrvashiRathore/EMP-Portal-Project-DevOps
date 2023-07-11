@@ -108,7 +108,8 @@ pipeline {
             steps {
              //   sh "docker tag 246638f09d31 shantanu2001/flask_application"
                 sh "docker login -u ${username} -p ${password}"
-                sh "docker push urvashirathoree / emp-portal-project-devops"
+                sh "docker push urvashirathoree/emp-portal-project-devops
+"
             }
         }
        stage('Deploy to containers') {
