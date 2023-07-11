@@ -1,6 +1,6 @@
 def img
-def username = "urvashi21"
-def password = "ur21"
+def username = "urvashirathoree"
+def password = "sakurv3099"
 pipeline {
     agent any
 
