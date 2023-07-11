@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        registry = "UrvashiRathore/EMP-Portal-Project-DevOps"
+        registry = "urvashirathore/emp-portal-project-devops"
         registryCredential = 'DOCKERHUB'
         githubCredential = 'Github-Creds'
         dockerImage = ''
