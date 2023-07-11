@@ -5,9 +5,9 @@ pipeline {
     agent any
 
     environment {
-      //  registry = "urvashirathore/emp-portal-project-devops"
+        registry = "urvashirathore/emp-portal-project-devops"
        // registryCredential = 'DOCKERHUB'
-       // githubCredential = 'Github-Creds'
+        githubCredential = 'Github-Creds'
        // dockerImage = ''
        // scannerHome = tool 'sonarqube_jenkins'
     }
