@@ -1,3 +1,6 @@
+def img
+def username = "urvashi21"
+def password = "ur21"
 pipeline {
     agent any
 
@@ -71,31 +74,52 @@ pipeline {
             }
         }
 
-        stage('Build Image') {
+       // stage('Build Image') {
+         //   steps {
+           //     script {
+             //       img = "${registry}:${env.BUILD_ID}"
+               //     println("${img}")
+                 //   dockerImage = docker.build(img)
+                // }
+            // }
+        // }
+
+        //stage('Push to DockerHub') {
+          //  steps {
+            //    script {
+              //      docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                //        dockerImage.push()
+                  //  }
+                // }
+            // }
+        // }
+
+        // stage('Deploy to containers') {
+           // steps {
+             //   sh script: "docker run -d --name \${JOB_NAME} -P 5002:5000 \${img}"
+           // }
+       // }
+        stage('Build image') {
             steps {
-                script {
-                    img = "${registry}:${env.BUILD_ID}"
-                    println("${img}")
-                    dockerImage = docker.build(img)
-                }
+                sh 'docker build -t flask-app .'
+            }
+        }
+        stage('Push To Dockerhub') {
+            steps {
+             //   sh "docker tag 246638f09d31 shantanu2001/flask_application"
+                sh "docker login -u ${username} -p ${password}"
+                sh "docker push urvashirathoree / emp-portal-project-devops"
+            }
+        }
+       stage('Deploy to containers') {
+            steps {
+                sh "docker login -u ${username} -p ${password}"
+                sh "docker run -it -p 5000:5000 -d flask-app"
             }
         }
 
-        stage('Push to DockerHub') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
 
-        stage('Deploy to containers') {
-            steps {
-                sh script: "docker run -d --name \${JOB_NAME} -P 5002:5000 \${img}"
-            }
-        }
+
     }
 
     post {
