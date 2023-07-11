@@ -131,7 +131,7 @@ pipeline {
                 slackSend(
                     channel: '#cicd-pipeline',
                     color: color,
-                    message: "Build ${env.BUILD_NUMBER} ${build Status}: STAGE=${env.STAGE_NAME}",
+                    message: "Build ${env.BUILD_NUMBER} ${buildStatus}: STAGE=${env.STAGE_NAME}",
                     teamDomain: 'project-d5t8181',
                     tokenCredentialId: 's8'
                 )
